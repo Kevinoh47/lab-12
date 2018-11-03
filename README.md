@@ -1,6 +1,17 @@
 ![CF](http://i.imgur.com/7v5ASc8.png) LAB - ORM: Advanced Modeling
 =================================================
+## Github
+https://github.com/Kevinoh47/lab-12/pull/1
 
+## Travis CI
+https://travis-ci.com/Kevinoh47/lab-12
+
+[![Build Status](https://travis-ci.com/Kevinoh47/lab-12.svg?branch=working12)](https://travis-ci.com/Kevinoh47/lab-12)
+
+## Heroku
+https://codefellows-401-lab12.herokuapp.com/
+
+=================================================
 ## Before you begin
 * You will be continuing to work on your API server
 * Provided for you is a working server, which you may use as a starter
@@ -9,7 +20,7 @@
 ###### API Requirements
 * Create a new `Model` class/interface to serve as the base for all models
 * Convert the Category and Product interfaces to extend from the Model class
-* Link the category and product monglo models, with the products being virtually populated into the categories
+* Link the category and product mongo models, with the products being virtually populated into the categories
 * Add a validate hook to both models and return an error if the model fails a validation rule
 * Add a pre-save hook to both models to convert some element of the data (or to add content to a field) based on some condition.
   * Use your imagination, but make a few logical decisions for your store
