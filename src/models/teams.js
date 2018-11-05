@@ -1,7 +1,7 @@
 'use strict';
 
 import Storage from '../lib/storage/storage.js';
-import schema from './mongo/teams.js';
+import schema from './mongo/teams-schema.js';
 
 const storage = new Storage(schema);
 
