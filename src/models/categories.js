@@ -1,42 +1,10 @@
 'use strict';
 
-import Storage from '../lib/storage/storage.js';
-import schema from './mongo/categories-schema.js';
+import Model from './models.js';
+import schema from './mongo-schemas/categories-schema.js';
 
-const storage = new Storage(schema);
+class Categories extends Model {}
 
-class Categories {
+const categories = new Categories(schema);
 
-  static findOne(id) {
-    let query = { _id:id };
-    return this.find(query);
-  }
-
-  static schema() {
-    return typeof schema.jsonSchema === 'function' ? schema.jsonSchema() : {};
-  }
-
-  static find(query) {
-    return storage.find(query);
-  }
-
-  static save(data) {
-    return storage.save(data);
-  }
-
-  static delete(id) {
-    return storage.delete(id);
-  }
-
-  static put(id, data) {
-    return storage.save(data);
-  }
-
-  static patch(id, data) {
-    data._id = id;
-    return storage.save(data);
-  }
-
-}
-
-export default Categories;
+export default categories;
