@@ -16,7 +16,9 @@ const products = mongoose.Schema(
 );
 
 products.pre('validate', function() {
-  console.log('products pre validate function for this: ', this);
+  if (this.price < 0) {
+    throw('All prices must be at a positive number.');
+  }
 });
 
 products.pre('save', function() {

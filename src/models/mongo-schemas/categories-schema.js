@@ -30,9 +30,20 @@ categories.pre('find', function() {
   }
 });
 
-// categories.pre('validate', function() {
-//   console.log('categories pre validate function for this: ', this);
-// });
+categories.pre('validate', function() {
+  if (!this.name) {
+    throw('A name for the category is required.');
+  }
+  // the below try / catch outputs the message to the console but doesn't prevent the save.
+  // try {
+  //   if (!this.name) {
+  //     throw('A name for the category is required.');
+  //   }
+  // }
+  // catch(e) {
+  //   console.error(e);
+  // }
+});
 
 // categories.pre('save', function() {
 //   console.log('categories pre save with this: ', this);
