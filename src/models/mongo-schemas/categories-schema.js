@@ -5,7 +5,7 @@ require('mongoose-schema-jsonschema')(mongoose);
 
 const categories = mongoose.Schema(
   {
-    name: {type:String, require:true},
+    name: {type:String, require:true, unique:true},
     description: {type: String},
   }, 
   { 
