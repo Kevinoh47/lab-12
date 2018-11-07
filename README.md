@@ -11,6 +11,33 @@ https://travis-ci.com/Kevinoh47/lab-12
 ## Heroku
 https://codefellows-401-lab12.herokuapp.com/
 
+
+## methods
+Because the models need to support the same set of methods, we were able to abstract the specific model implementation into a models.js file, allowing us to simplify the specific model files. The products.js and categories.js model files now import the model.js file, and extend the Model class. The Model class itself takes a schema as an input variable. These schemas are now defined in the ../models/mongo-schemas folder:  categories-schema.js and products-schema.js. The schemas define the shape of the data to be input/enforced to mongoose/mongo. 
+
+Note that categories has a virtual field for associated products.
+
+The class methods, contained in the methods.js file, are as follows:
+constructor(schema)
+schema()
+find(query)
+save(data)
+put(id, data)
+patch(id, data)
+delete(id)
+
+These model class methods correspond to API route methods which call them from the src/api/v1.js file, which serves as a facade for these lower-level mongo db methods:
+
+router.get(route, callback)
+router.post(route, callback)
+router.put(route, callback)
+router.patch(route, callback)
+router.delete(route, callback)
+
+
+
+
+
 =================================================
 ## Before you begin
 * You will be continuing to work on your API server
