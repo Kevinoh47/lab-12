@@ -57,7 +57,7 @@ describe('api server', () => {
 
   });
 
-  it('should respond properly on a get request to a valid model', () => {
+  it('should respond properly on a get request to a valid teams model', () => {
 
     return mockRequest
       .get('/api/v1/teams')
@@ -69,6 +69,31 @@ describe('api server', () => {
       });
 
   });
+
+  it('should respond properly on a get request to a valid categories model', () => {
+
+    return mockRequest
+      .get('/api/v1/categories')
+      .then(results => {
+        expect(results.status).toBe(200);
+      })
+      .catch(err => {
+        expect(err).not.toBeDefined();
+      });
+  });
+
+  it('should respond properly on a get request to a valid products model', () => {
+
+    return mockRequest
+      .get('/api/v1/products')
+      .then(results => {
+        expect(results.status).toBe(200);
+      })
+      .catch(err => {
+        expect(err).not.toBeDefined();
+      });
+  });
+
 
   it('should be able to post to /api/v1/teams', ()  => {
 
@@ -84,7 +109,6 @@ describe('api server', () => {
       .catch( err => console.error('err', err) );
 
   });
-
 
   it('following a post, should find a single record', () => {
 
@@ -115,6 +139,69 @@ describe('api server', () => {
       .catch(err => {
         expect(err).not.toBeDefined();
       });
+
+  });
+
+  it('should be able to post to /api/v1/categories', ()  => {
+
+    let obj = {name:'cheeses', description:'goat, cow, and sheep cheeses from around the world'};
+
+    return mockRequest
+      .post('/api/v1/categories')
+      .send(obj)
+      .then(results => {
+        expect(results.status).toBe(200);
+        expect(results.body.name).toEqual(obj.name);
+      })
+      .catch( err => console.error('err', err) );
+
+  });
+
+  it('following a post, should find a single categories record', () => {
+
+    let obj = {name:'wines', description:'fine wines from around the world'};
+
+    return mockRequest
+      .post('/api/v1/categories')
+      .send(obj)
+      .then(results => {
+        return mockRequest.get(`/api/v1/categories/${results.body._id}`)
+          .then(list => {
+            expect(list.body[0].name).toEqual(obj.name);
+            expect(list.status).toBe(200);
+          });
+      })
+      .catch( err => console.error('err', err) );
+
+  });
+
+  it('should be able to post to /api/v1/products', ()  => {
+
+    let obj = {name:'Acme Camembert', description: 'delicious', category:'cheeses', price:29};
+    obj.name =obj.name.toUpperCase();
+
+    return mockRequest
+      .post('/api/v1/products')
+      .send(obj)
+      .then(results => {
+        expect(results.status).toBe(200);
+        expect(results.body.name).toEqual(obj.name);
+      })
+      .catch( err => console.error('err', err) );
+
+  });
+
+  it('A negative product price should cause an error', ()  => {
+
+    let obj = {name:'Acme Camembert', description: 'delicious', category:'cheeses', price:-29};
+
+    return mockRequest
+      .post('/api/v1/producrs')
+      .send(obj)
+      .then(results => {
+        expect(results.status).toBe(500);
+      })
+      .catch( err => console.error('err', err) );
 
   });
 
